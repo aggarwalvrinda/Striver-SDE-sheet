@@ -42,3 +42,26 @@ class Solution {
 
     }
 }
+/* this is the code for DFS 
+*/
+class Solution {
+    public boolean isBipartite(int[][] graph) {
+        int n = graph.length;
+        int colour[] = new int[n];
+        for(int i=0;i<n;i++){
+            if(colour[i]==0 && !isValid(graph,colour,1,i)){
+                return false;
+            }
+        }
+        return true;
+    }
+    public boolean isValid(int[][] g, int[]colour,int c,int node){
+        if(colour[node]!=0) return colour[node]==c;
+        colour[node]=c;
+        for(int next:g[node]){
+            if(!isValid(g,colour,-c,next)) return false;
+
+        }
+        return true;
+    }
+}
