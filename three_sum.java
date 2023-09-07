@@ -61,3 +61,29 @@ use beause it is already being used as i
 
 so for now think of it like [-1,0,1,2,-1,-4] -1,1 is i and j respectively add 0,1,2 in the heap 
 */
+
+//optimised code for O(n^2)
+
+class Solution {
+    public List<List<Integer>> threeSum(int[] nums) {
+        /
+        Set<List<Integer>> st= new HashSet<>();
+        int n = nums.length;
+        for(int i=0;i<n;i++){
+            Set<Integer> hashset = new HashSet<>();
+            for(int j=i+1;j<n;j++){
+                int k= -(nums[i]+nums[j]);
+                if(hashset.contains(k)){
+                    List<Integer> temp = Arrays.asList(nums[i], nums[j], k);
+                        temp.sort(null);
+                        st.add(temp);
+                    
+                    //j++;
+                }hashset.add(nums[j]);
+            }
+            
+        }
+        List<List<Integer>> ans = new ArrayList<>(st);
+        return ans;
+    }
+}
