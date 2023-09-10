@@ -1,0 +1,85 @@
+import com.StackEmptyException;
+import com.StackFullException;
+
+public class stack_array {
+    private int data[];
+    private int  top;
+    public stack_array(){
+        data = new int[10];
+        top =-1;
+    }
+    public stack_array(int capacity){
+        data =new int[capacity];
+        top =-1;
+
+    }
+
+    public boolean isEmpty(){
+        if(top==-1){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    public int size(){
+        return top+1;
+    }
+    public int top() throws StackEmptyException {
+        if(size()==0){
+            StackEmptyException e= new StackEmptyException();
+            throw e;
+        }
+        return data[top];
+    }
+    public void push(int elem) throws StackFullException {
+        if(size()==data.length){
+//            //stackfullexception
+//            StackFullException e= new StackFullException();
+//            throw e;
+            doubleCapacity();
+         }
+        //for making this dynamic we can double the size of the array so that it doesn't show exception
+        top++;
+        data[top]=elem;
+
+    }
+
+    private void doubleCapacity() {
+        int temp []=data;
+        data=new int[2*temp.length];
+        for(int i=0;i<=top;i++){
+            data[i]=temp[i];
+            
+        }
+    }
+    public int pop() throws StackEmptyException{
+        if(size()==0){
+            StackEmptyException e= new StackEmptyException();
+            throw e;
+        }
+        int temp=data[top];
+        top--;
+        return temp;
+
+    }
+
+
+}
+
+//in new file we can make stackUse;
+
+import com.StackEmptyException;
+import com.StackFullException;
+
+public class stackUse {
+    public static void main(String[] args) throws StackFullException, StackEmptyException {
+        stack_array stk = new stack_array();
+        stk.push(10);
+        stk.push(11);
+        stk.push(9);
+        stk.push(7);
+        System.out.println(stk.pop());
+        stk.pop();
+    }
+}
+
