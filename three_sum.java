@@ -87,3 +87,47 @@ class Solution {
         return ans;
     }
 }
+
+/* For better Approch - 2 pointer approch 
+this is the best approach in which i is fixed in the front j is i+1 and k is at the end of the array this already sorted 
+
+there will be 2 moving pointers i.e. j(starts from i+1) and k(starts from the last index). The pointer j will move forward and the pointer k will move backward until they cross each other while the value of i will be fixed.
+
+Now we will check the sum i.e. arr[i]+arr[j]+arr[k].
+If the sum is greater, then we need lesser elements and so we will decrease the value of k(i.e. k–).
+If the sum is lesser than the target, we need a bigger value and so we will increase the value of j (i.e. j++).
+If the sum is equal to the target, we will simply insert the triplet i.e. arr[i], arr[j], arr[k] into our answer and move the pointers j and k skipping the duplicate elements(i.e. by checking the adjacent elements while moving the pointers).
+
+time complexity = nlogn +(m*n);
+Space complexity: O(1) - we are not using any extra space
+*/
+class Solution {
+    public List<List<Integer>> threeSum(int[] nums) {
+      int n=nums.length;
+        List<List<Integer>> ans = new ArrayList<>();
+
+        Arrays.sort(nums);
+        for(int i=0;i<n;i++){
+          if(i>0 && nums[i]==nums[i-1]) continue;
+          int j=i+1;
+          int k=n-1;
+          while(k>j){
+            int sum = nums[i]+nums[j]+nums[k];
+            if(sum>0){
+              k--;
+            }else if(sum<0){
+              j++;
+            }else{
+              List<Integer> temp = Arrays.asList(nums[i], nums[j],nums[k]);
+              ans.add(temp);
+              j++;
+              k--;
+              while(j<k && nums[j]==nums[j-1])j++;
+              while(j<k && nums[k]==nums[k+1]) k--;
+            }
+          }
+
+        }
+        return ans;
+    }
+}
