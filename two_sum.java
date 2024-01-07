@@ -42,7 +42,7 @@ check 2 in heap if yes add that in new arr and return that arr in the end
 |_2,0____|
 
 
-
+Time complexity  - NlogN
 
 
 
@@ -65,4 +65,27 @@ class Solution {
         }
         return new int[]{};
     }
+}
+/*Here is a solution using sliding window 
+
+here there are 2 pointers one at the starting of the arr and one at the end of the arr*/
+
+public class Solution {
+    public static int[] twoSum(int numbers[], int target) {
+        // Write your code here..
+        int ans[]=new int[2];
+        int start =0;
+        int end = numbers.length-1;
+        while(end>start){
+            if(numbers[start]+numbers[end]>target) end--;
+            else if(numbers[start]+numbers[end]<target)start++;
+            else{
+                ans[0]=start;
+                ans[1]=end;
+                break;
+            }
+        }
+        return ans;
+    }
+
 }
