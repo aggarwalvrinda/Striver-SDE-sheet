@@ -1,0 +1,3 @@
+Comparator 
+sort according to your need 
+public void sort(List list, ComparatorClass c)
